@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from app.api.routes import decision, health, history
 
 from app.database.database import Base, engine
-from app.models import decision_log
+from app.models import decision_log, policy
 
 Base.metadata.create_all(bind=engine)
 
