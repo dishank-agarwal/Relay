@@ -22,6 +22,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "https://verdant-bubblegum-3b8ec4.netlify.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
