@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database.session import get_db
+from app.models.decision_log import DecisionLog
 from app.schemas.decision import DecisionRequest
 from app.services.decision_service import DecisionService
 
@@ -22,3 +23,16 @@ def make_decision(
         "policy": decision.policy,
         "can_execute": decision.can_execute,
     }
+
+@router.get("/decision/{decision_id}")
+def get_decision(
+    decision_id: int,
+    db: Session = Depends(get_db)
+):
+    decision = (
+        db.query(DecisionLog)
+        .filter(DecisionLog.id == decision_id)
+        .first()
+    )
+
+    return decision

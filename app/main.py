@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.api.routes import decision, health
+from app.api.routes import decision, health, history
 
 from app.database.database import Base, engine
 from app.models import decision_log
@@ -15,3 +15,4 @@ app = FastAPI(
 
 app.include_router(health.router)
 app.include_router(decision.router)
+app.include_router(history.router)
