@@ -2,6 +2,11 @@ from fastapi import FastAPI
 
 from app.api.routes import decision, health
 
+from app.database.database import Base, engine
+from app.models import decision_log
+
+Base.metadata.create_all(bind=engine)
+
 app = FastAPI(
     title="Relay API",
     description="API-first control plane for AI-driven payment operations.",
