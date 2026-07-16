@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+from app.api.routes import decision, health
 
-@app.get("/health")
-def health():
-    return {
-        "status" : "heathly",
-        "service" : "Relay",
-        "version" : "1.0.0"
-    }
+app = FastAPI(
+    title="Relay API",
+    description="API-first control plane for AI-driven payment operations.",
+    version="1.0.0"
+)
+
+app.include_router(health.router)
+app.include_router(decision.router)
