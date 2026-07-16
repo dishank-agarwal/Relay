@@ -1,11 +1,14 @@
 from app.models.decision_log import DecisionLog
 from app.schemas.decision import DecisionRequest
 from app.services.policy_service import PolicyService
+from app.services.risk_service import RiskService
 
 class DecisionService:
 
     @staticmethod
     def evaluate(request: DecisionRequest, db):
+
+        risk = RiskService.calculate(request)
 
         result = PolicyService.evaluate(request, db)
 
@@ -16,7 +19,7 @@ class DecisionService:
             amount=request.amount,
             decision=result["decision"],
             reason=result["reason"],
-            risk_score=result["risk_score"],
+            risk_score=risk["risk_score"],
             policy=result["policy"],
             can_execute=result["can_execute"],
         )

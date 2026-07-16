@@ -14,14 +14,6 @@ class PolicyService:
             .all()
         )
 
-        for p in policies:
-            print(
-                "POLICY:",
-                p.policy_id,
-                p.rule,
-                p.enabled
-            )
-        
         for policy in policies:
 
             if(
@@ -44,6 +36,5 @@ class PolicyService:
             "policy": "DEFAULT_POLICY",
             "decision": "APPROVED",
             "reason": "Transaction satisfies all current policies.",
-            "risk_score": 20,
             "can_execute": True
         }
