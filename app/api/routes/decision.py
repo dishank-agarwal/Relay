@@ -36,3 +36,16 @@ def get_decision(
     )
 
     return decision
+
+@router.get("/decisions")
+def get_all_decisions(
+    db: Session = Depends(get_db)
+):
+
+    decisions = (
+        db.query(DecisionLog)
+        .order_by(DecisionLog.id.desc())
+        .all()
+    )
+
+    return decisions
